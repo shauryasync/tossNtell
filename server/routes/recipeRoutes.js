@@ -1,4 +1,5 @@
 import express from "express";
+import upload from "../middleware/uploadMiddleware.js";
 
 import {
   createRecipe,
@@ -12,7 +13,7 @@ import protect from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-router.post("/recipes", protect, createRecipe);
+router.post("/recipes", protect, upload.single("image"), createRecipe);
 
 router.get("/recipes", getRecipes);
 

@@ -1,6 +1,15 @@
 import Recipe from "../models/Recipe.js";
+import uploadToCloudinary from "../utils/uploadToCloudinary.js";
 
 const createRecipe = async (req, res) => {
+  let image = "";
+
+  if (req.file) {
+    const uploadedImage = await uploadToCloudinary(req.file.buffer);
+
+    image = uploadedImage.secure_url;
+  }
+
   const {
     title,
     description,
@@ -11,12 +20,14 @@ const createRecipe = async (req, res) => {
     difficulty,
     cookingTime,
   } = req.body;
-
+  const cookingTimeNumber = Number(cookingTime);
   if (
     !title ||
     !description ||
-    ingredients.length === 0 ||
-    instructions.length === 0 ||
+    !ingredients ||
+    (Array.isArray(ingredients) && ingredients.length === 0) ||
+    !instructions ||
+    (Array.isArray(instructions) && instructions.length === 0) ||
     !category ||
     !cuisine ||
     !difficulty ||
@@ -35,8 +46,8 @@ const createRecipe = async (req, res) => {
     category,
     cuisine,
     difficulty,
-    cookingTime,
-
+    cookingTime: cookingTimeNumber,
+    image,
     createdBy: req.user._id,
   });
 
