@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 
 import Home from "./pages/Home";
 import Register from "./pages/Register";
@@ -9,31 +9,29 @@ import RecipeDetails from "./pages/RecipeDetails";
 import EditRecipe from "./pages/EditRecipe";
 
 import Navbar from "./components/NavBar";
-
 function App() {
   return (
-    <BrowserRouter>
-      <div className="min-h-screen bg-slate-950 text-white flex flex-col">
-        <Navbar />
-        <main className="flex-1">
-          <Routes>
-            <Route path="/" element={<Home />} />
+    <div className="min-h-screen bg-slate-950 text-white flex flex-col">
+      <Navbar />
 
-            <Route path="/login" element={<Login />} />
+      <main className="flex-1">
+        <Routes>
+          <Route path="/" element={<Home />} />
 
-            <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
 
-            <Route path="/recipes/:id" element={<RecipeDetails />} />
+          <Route path="/register" element={<Register />} />
 
-            <Route path="/create-recipe" element={<CreateRecipe />} />
+          <Route path="/recipes/:id" element={<RecipeDetails />} />
 
-            <Route path="/edit/:id" element={<EditRecipe />} />
+          <Route path="/create-recipe" element={<CreateRecipe />} />
 
-            <Route path="/profile" element={<Profile />} />
-          </Routes>
-        </main>
-      </div>
-    </BrowserRouter>
+          <Route path="/edit/:id" element={<EditRecipe />} />
+
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
+      </main>
+    </div>
   );
 }
 
