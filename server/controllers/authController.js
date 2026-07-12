@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import generateToken from "../utils/generateToken.js";
+import Recipe from "../models/Recipe.js";
 
 export const registerUser = async (req, res) => {
   const { name, email, password } = req.body;
@@ -59,5 +60,12 @@ export const logoutUser = async (req, res) => {
 };
 
 export const getMe = async (req, res) => {
-  res.json(req.user);
+  const recipes = await Recipe.find({
+    createdBy: req.user._id,
+  }).sort({ createdAt: -1 });
+
+  res.json({
+    user: req.user,
+    recipes,
+  });
 };
