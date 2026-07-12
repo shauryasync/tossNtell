@@ -46,8 +46,10 @@ const Login = () => {
             type="email"
             name="email"
             placeholder="Enter your email"
+            value={formData.email}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+            autoComplete="email"
+            className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
           />
         </div>
 
@@ -60,8 +62,10 @@ const Login = () => {
             type="password"
             name="password"
             placeholder="Enter your password"
+            value={formData.password}
             onChange={handleChange}
-            className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+            autoComplete="current-password"
+            className="w-full bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
           />
         </div>
 
