@@ -13,7 +13,7 @@ app.use(cookieParser());
 
 app.use(
   cors({
-    origin: "https://toss-ntell.vercel.app/",
+    origin: true,
     credentials: true,
   }),
 );
