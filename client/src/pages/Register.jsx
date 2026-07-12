@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+
 const Register = () => {
   const navigate = useNavigate();
-
   const { register } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -24,52 +24,80 @@ const Register = () => {
 
     try {
       await register(formData);
-
       navigate("/");
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response?.data?.message || "Registration failed");
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-[80vh]">
+    <div className="min-h-[calc(100vh-72px)] bg-orange-50 flex items-center justify-center px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-xl p-8 w-[400px]"
+        className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8"
       >
-        <h1 className="text-3xl font-bold mb-6 text-center">Register</h1>
+        <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
+          Create Account
+        </h1>
 
-        <input
-          type="text"
-          name="name"
-          placeholder="Name"
-          className="w-full border p-3 rounded mb-4"
-          onChange={handleChange}
-        />
+        <div className="mb-5">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Name
+          </label>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full border p-3 rounded mb-4"
-          onChange={handleChange}
-        />
+          <input
+            type="text"
+            name="name"
+            placeholder="Enter your name"
+            value={formData.name}
+            onChange={handleChange}
+            className="w-full px-4 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-500"
+          />
+        </div>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full border p-3 rounded mb-4"
-          onChange={handleChange}
-        />
+        <div className="mb-5">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Email
+          </label>
 
-        <button className="w-full bg-orange-500 text-white py-3 rounded-lg">
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full px-4 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-500"
+          />
+        </div>
+
+        <div className="mb-6">
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            Password
+          </label>
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Create a password"
+            value={formData.password}
+            onChange={handleChange}
+            className="w-full px-4 py-3 bg-white text-gray-900 placeholder-gray-400 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400 focus:border-orange-500"
+          />
+        </div>
+
+        <button
+          type="submit"
+          className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition"
+        >
           Register
         </button>
 
-        <p className="text-center mt-5">
+        <p className="text-center text-gray-600 mt-6">
           Already have an account?{" "}
-          <Link className="text-orange-600" to="/login">
+          <Link
+            to="/login"
+            className="text-orange-600 hover:text-orange-700 font-semibold"
+          >
             Login
           </Link>
         </p>

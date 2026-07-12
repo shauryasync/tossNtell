@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+
 const Login = () => {
   const navigate = useNavigate();
-
   const { login } = useAuth();
 
   const [formData, setFormData] = useState({
@@ -23,44 +23,55 @@ const Login = () => {
 
     try {
       await login(formData);
-
       navigate("/");
     } catch (error) {
-      alert(error.response.data.message);
+      alert(error.response?.data?.message || "Login failed");
     }
   };
 
   return (
-    <div className="flex justify-center items-center h-[80vh]">
+    <div className="min-h-[calc(100vh-72px)] bg-orange-50 flex items-center justify-center px-4">
       <form
         onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-xl p-8 w-[400px]"
+        className="bg-white shadow-xl rounded-2xl p-8 w-full max-w-md"
       >
-        <h1 className="text-3xl font-bold mb-6 text-center">Login</h1>
+        <h1 className="text-3xl font-bold text-gray-800 text-center mb-8">
+          Welcome Back
+        </h1>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          className="w-full border p-3 rounded mb-4"
-          onChange={handleChange}
-        />
+        <div className="mb-5">
+          <label className="block mb-2 text-gray-700 font-medium">Email</label>
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          className="w-full border p-3 rounded mb-4"
-          onChange={handleChange}
-        />
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter your email"
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+          />
+        </div>
 
-        <button className="w-full bg-orange-500 text-white py-3 rounded-lg">
+        <div className="mb-6">
+          <label className="block mb-2 text-gray-700 font-medium">
+            Password
+          </label>
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter your password"
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-orange-500 focus:ring-2 focus:ring-orange-200"
+          />
+        </div>
+
+        <button className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold py-3 rounded-lg transition cursor-pointer">
           Login
         </button>
 
-        <p className="text-center mt-5">
+        <p className="text-center mt-6 text-gray-600">
           Don't have an account?{" "}
-          <Link className="text-orange-600" to="/register">
+          <Link to="/register" className="text-orange-600 font-semibold">
             Register
           </Link>
         </p>
