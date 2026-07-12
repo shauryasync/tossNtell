@@ -19,7 +19,16 @@ router.get("/recipes", getRecipes);
 
 router.get("/recipes/:id", getRecipeById);
 
+<<<<<<< HEAD
 router.put("/recipes/:id", protect, upload.single("image"), updateRecipe);
+=======
+router.put(
+  "/recipes/:id",
+  protect,
+  upload.single("image"),
+  updateRecipe
+);
+>>>>>>> 94da501af41f2036000272d8c20b32cee1704457
 
 router.delete("/recipes/:id", protect, deleteRecipe);
 

@@ -55,7 +55,11 @@ const RecipeDetails = () => {
     <div className="min-h-screen bg-orange-50 py-10 px-4">
       <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-xl overflow-hidden">
         <img
-          src={recipe.image}
+          src={
+            recipe.image && recipe.image.trim() !== ""
+              ? recipe.image
+              : "https://placehold.co/1000x700/orange/white?text=No+Image"
+          }
           alt={recipe.title}
           className="w-full h-[420px] object-cover"
         />
