@@ -34,39 +34,41 @@ const Home = () => {
 
   if (loading) {
     return (
-      <h2 className="text-center mt-20 text-2xl font-semibold text-gray-700">
-        Loading Recipes...
-      </h2>
+      <div className="flex justify-center items-center min-h-[70vh]">
+        <h2 className="text-2xl font-semibold text-gray-700">
+          Loading Recipes...
+        </h2>
+      </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-orange-50">
-      <div className="max-w-7xl mx-auto px-6 py-10">
-        <div className="mb-10">
-          <h1 className="text-5xl font-bold text-gray-900">Discover Recipes</h1>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        <div className="text-center mb-10">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900">
+            Discover Recipes
+          </h1>
 
-          <p className="text-gray-600 mt-2">
+          <p className="text-gray-600 mt-3 text-base md:text-lg">
             Find recipes shared by the community.
           </p>
         </div>
 
-        {/* Search Section */}
-
         <div className="bg-white rounded-2xl shadow-md p-5 mb-10">
-          <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <input
               type="text"
-              placeholder="🔍 Search recipes..."
+              placeholder="Search recipes..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-orange-500"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400"
             />
 
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-orange-500"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400"
             >
               <option value="">All Categories</option>
               <option value="breakfast">Breakfast</option>
@@ -78,7 +80,7 @@ const Home = () => {
             <select
               value={difficulty}
               onChange={(e) => setDifficulty(e.target.value)}
-              className="border border-gray-300 rounded-xl px-4 py-3 text-gray-900 outline-none focus:border-orange-500"
+              className="w-full border border-gray-300 rounded-xl px-4 py-3 text-gray-900 focus:outline-none focus:ring-2 focus:ring-orange-400"
             >
               <option value="">All Difficulty</option>
               <option value="easy">Easy</option>
@@ -88,27 +90,25 @@ const Home = () => {
 
             <button
               onClick={fetchRecipes}
-              className="bg-orange-500 hover:bg-orange-600 text-white rounded-xl font-semibold transition"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white font-semibold rounded-xl py-3 transition"
             >
               Search
             </button>
           </div>
         </div>
 
-        {/* Recipe Grid */}
-
         {recipes.length === 0 ? (
-          <div className="text-center py-20">
-            <h2 className="text-2xl font-semibold text-gray-700">
+          <div className="bg-white rounded-2xl shadow p-10 text-center">
+            <h2 className="text-2xl font-bold text-gray-800">
               No recipes found
             </h2>
 
-            <p className="text-gray-500 mt-2">
-              Try changing your search or filters.
+            <p className="text-gray-500 mt-3">
+              Try a different search or category.
             </p>
           </div>
         ) : (
-          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-8">
             {recipes.map((recipe) => (
               <RecipeCard key={recipe._id} recipe={recipe} />
             ))}

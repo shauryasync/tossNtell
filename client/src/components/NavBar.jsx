@@ -11,60 +11,65 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-b shadow-sm">
-      <div className="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        <Link to="/" className="text-3xl font-bold text-orange-600">
-          TossnTell
-        </Link>
-
-        <div className="flex items-center gap-6">
+    <nav className="bg-white border-b shadow-sm sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <Link
             to="/"
-            className="text-gray-700 hover:text-orange-500 font-medium"
+            className="text-3xl font-extrabold text-orange-600 text-center md:text-left"
           >
-            Home
+            TossnTell
           </Link>
 
-          {user ? (
-            <>
-              <Link
-                to="/create-recipe"
-                className="text-gray-700 hover:text-orange-500 font-medium"
-              >
-                Create Recipe
-              </Link>
+          <div className="flex flex-wrap justify-center md:justify-end items-center gap-3">
+            <Link
+              to="/"
+              className="text-gray-700 hover:text-orange-600 font-medium transition"
+            >
+              Home
+            </Link>
 
-              <Link
-                to="/profile"
-                className="text-gray-700 hover:text-orange-500 font-medium"
-              >
-                Profile
-              </Link>
+            {user ? (
+              <>
+                <Link
+                  to="/create-recipe"
+                  className="text-gray-700 hover:text-orange-600 font-medium transition"
+                >
+                  Create Recipe
+                </Link>
 
-              <button
-                onClick={handleLogout}
-                className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-lg"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/login"
-                className="text-gray-700 hover:text-orange-500 font-medium"
-              >
-                Login
-              </Link>
+                <Link
+                  to="/profile"
+                  className="text-gray-700 hover:text-orange-600 font-medium transition"
+                >
+                  Profile
+                </Link>
 
-              <Link
-                to="/register"
-                className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-lg"
-              >
-                Register
-              </Link>
-            </>
-          )}
+                <button
+                  onClick={handleLogout}
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-lg transition"
+                >
+                  Logout
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="text-gray-700 hover:text-orange-600 font-medium transition"
+                >
+                  Login
+                </Link>
+
+                <Link
+                  to="/register"
+                  className="bg-orange-500 hover:bg-orange-600 text-white px-5 py-2 rounded-lg transition"
+                >
+                  Register
+                </Link>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </nav>
