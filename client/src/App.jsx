@@ -8,6 +8,8 @@ import CreateRecipe from "./pages/CreateRecipe";
 import RecipeDetails from "./pages/RecipeDetails";
 import EditRecipe from "./pages/EditRecipe";
 
+import ProtectedRoute from "./components/ProtectedRoute";
+
 import Navbar from "./components/NavBar";
 function App() {
   return (
@@ -24,11 +26,32 @@ function App() {
 
           <Route path="/recipes/:id" element={<RecipeDetails />} />
 
-          <Route path="/create-recipe" element={<CreateRecipe />} />
+          <Route
+            path="/create-recipe"
+            element={
+              <ProtectedRoute>
+                <CreateRecipe />
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="/edit/:id" element={<EditRecipe />} />
+          <Route
+            path="/edit/:id"
+            element={
+              <ProtectedRoute>
+                <EditRecipe />
+              </ProtectedRoute>
+            }
+          />
 
-          <Route path="/profile" element={<Profile />} />
+          <Route
+            path="/profile"
+            element={
+              <ProtectedRoute>
+                <Profile />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
       </main>
     </div>
