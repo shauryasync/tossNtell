@@ -153,31 +153,8 @@ const updateRecipe = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const {
-      title,
-      description,
-      ingredients,
-      instructions,
-      category,
-      cuisine,
-      difficulty,
-      cookingTime,
-    } = req.body;
-
-    if (
-      !title ||
-      !description ||
-      ingredients.length === 0 ||
-      instructions.length === 0 ||
-      !category ||
-      !cuisine ||
-      !difficulty ||
-      cookingTime == null
-    ) {
-      return res.status(400).json({
-        message: "All required fields are required",
-      });
-    }
+    console.log(req.body);
+    console.log(req.file);
 
     const recipe = await Recipe.findById(id);
 
@@ -193,12 +170,38 @@ const updateRecipe = async (req, res) => {
       });
     }
 
-    const updatedRecipe = await Recipe.findByIdAndUpdate(id, req.body, {
-      returnDocument: "after",
-      runValidators: true,
-    });
+    const { title, description, category, cuisine, difficulty, cookingTime } =
+      req.body;
 
-    res.status(200).json(updatedRecipe);
+    const ingredients = Array.isArray(req.body.ingredients)
+      ? req.body.ingredients
+      : [req.body.ingredients];
+
+    const instructions = Array.isArray(req.body.instructions)
+      ? req.body.instructions
+      : [req.body.instructions];
+
+    let image = recipe.image;
+
+    if (req.file) {
+      const uploadedImage = await uploadToCloudinary(req.file.buffer);
+
+      image = uploadedImage.secure_url;
+    }
+
+    recipe.title = title;
+    recipe.description = description;
+    recipe.ingredients = ingredients;
+    recipe.instructions = instructions;
+    recipe.category = category;
+    recipe.cuisine = cuisine;
+    recipe.difficulty = difficulty;
+    recipe.cookingTime = Number(cookingTime);
+    recipe.image = image;
+
+    await recipe.save();
+
+    res.status(200).json(recipe);
   } catch (error) {
     console.log(error);
 

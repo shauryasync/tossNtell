@@ -19,7 +19,7 @@ router.get("/recipes", getRecipes);
 
 router.get("/recipes/:id", getRecipeById);
 
-router.put("/recipes/:id", protect, updateRecipe);
+router.put("/recipes/:id", protect, upload.single("image"), updateRecipe);
 
 router.delete("/recipes/:id", protect, deleteRecipe);
 
